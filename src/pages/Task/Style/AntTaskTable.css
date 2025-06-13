@@ -1,0 +1,54 @@
+.custom-button {
+    padding: 0 8px; /* Butonun iç boşluğun */
+    font-size: 12px; /* Butonun yazı boyutu */
+    height: 24px; /* Butonun yüksekliği */
+    border-radius: 4px; /* Butonun köşelerini */
+    background-color: #f0f0f0; /* Butonun arka plan rengi */
+    color: #333; /* Butonun metin rengi */
+    border-color: #d9d9d9; /* Butonun kenarlık rengi */
+  }
+  
+  .custom-button:hover,
+  .custom-button:focus {
+    background-color: #e6e6e6; /* Butonun üzerine gelindiğinde ve odaklandığında arka plan rengin */
+  }
+
+  .table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.ant-table-thead > tr > th,
+.ant-table-tbody > tr > td {
+  line-height: 7px; 
+}
+.ant-table-thead > tr > th {
+  /* background-color: #f0f0f0;  */
+  background-color: #0c4b80; /* Başlık arkaplan rengi */
+  color: #ffffff; /* Başlık metin rengi */
+}
+
+.ant-table-tbody > tr > td {
+  background-color: #fff; /* Hücre arkaplan rengi */
+  color: #555; /* Hücre metin rengi */
+}
+
+
+.thead[class*="ant-table-thead"] th{
+  background-color: #0c4b80 !important;
+}
+
+thead[class*="ant-table-thead"] th{
+  background-color: #0c4b80 !important;
+}
+
+thead[class*="ant-table-thead"] tr :first-child [class*="ant-table-cell"] {
+  border-top-left-radius: 15px !important;
+}
+
+thead[class*="ant-table-thead"] tr :last-child [class*="ant-table-cell"]{
+  border-top-right-radius: 15px !important;
+}
+.custom-row-height .ant-table-cell {
+  /* height: 10px;  
+  line-height: 10px;  */
+}
