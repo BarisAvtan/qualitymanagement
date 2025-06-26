@@ -19,6 +19,7 @@ import TaskDetail from '../Component/TaskDetail';
 import moment from 'moment';
 import Cookies from 'js-cookie';
 
+
 function Task() {
 
     const {
@@ -39,7 +40,27 @@ function Task() {
     const [loadingTable, setLoadingTable] = useState(false);
 
     const token = useSelector((state) => state.General.token);
-  
+    let location = useLocation();
+    let navigate = useNavigate();
+
+
+    useEffect(() => {
+      
+        if (location?.search) {
+    
+            // Cookies.set('token', location?.search?.split("=")[1]?? '');
+            const queryParams = new URLSearchParams(location.search);
+            const userName = queryParams.get('userName');
+            const token = queryParams.get('token');
+    
+            Cookies.set('token', token);
+            Cookies.set('userName', userName);
+            
+            navigate('/task');
+        }
+    
+    }, [])
+
     const customerSearch = async (newValue) => {
         const [searchTextCustomerData] = await Promise.all([
             getCustomers(newValue)
@@ -228,7 +249,7 @@ function Task() {
                                     bordered
                                     rowClassName="custom-row-height"
                                     loading={loadingTable}
-                                    scroll={{ x: 'max-content' }} 
+                                    //scroll={{ x: 'max-content' }} 
 
                                 />
                             )}

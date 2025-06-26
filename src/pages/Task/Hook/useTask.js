@@ -34,7 +34,17 @@ function useTask() {
             title: "Müşteri",
             dataIndex: "customerName",
             key: "customerName",
-            width: 300, // ← piksel genişlik
+            width: 300, // piksel genişlik
+            ellipsis: true,
+            align: "center",
+            responsive: ['xs', 'sm', 'md', 'lg', 'xl'],
+
+        },
+        {
+            title: "Cihaz",
+            dataIndex: "deviceName",
+            key: "DeviceName",
+            width: 150, 
             ellipsis: true,
             align: "center",
             responsive: ['xs', 'sm', 'md', 'lg', 'xl'],
@@ -44,25 +54,35 @@ function useTask() {
             title: "Bayi",
             dataIndex: "serviceName",
             key: "serviceName",
-            width: "25%",
+            width: "20%",
             ellipsis: true,
             align: "center",
             responsive: ['md', 'lg', 'xl'],
         },
         {
-            title: "Görevi Tamamlayan Kullanıcı",
+            //title: "Görevi Tamamlayan Kullanıcı",
+            title: (
+                <>
+                  Tamamlayan<br /> <br />Kullanıcı
+                </>
+              ),
             dataIndex: "completedTaskUserName",
             key: "completedTaskUserName",
-            width: "20%",
+            width: "15%",
             ellipsis: true,
             align: "center",
             responsive: ['md', 'lg', 'xl']
         },
         {
-            title: "Montaj Tamamlama Tarihi",
+            // title: "Montaj Tamamlama Tarihi",
+            title: (
+                <>
+                  Montaj<br /> <br /> Tarihi
+                </>
+              ),
             dataIndex: "completionDate",
             key: "completionDate",
-            width: "10%",
+            width: "8%",
             ellipsis: true,
             align: "center",
             render: (_, record) => (
@@ -73,7 +93,11 @@ function useTask() {
             responsive: ['md', 'lg', 'xl']
         },
         {
-            title: "Fotograf Bilgisi",
+            //title: "Fotograf Bilgisi",
+            title: (
+                <>
+                  Fotoğraf<br /> <br />Bilgisi                </>
+              ),
             key: "detail",
             width: 120, // ← piksel genişlik
             ellipsis: true,
@@ -115,8 +139,9 @@ function useTask() {
             maxBodyLength: Infinity,
             url: url,
             headers: {
-              'Content-Type': 'application/json'
-            },
+                    
+                'Authorization': 'Bearer ' + Cookies.get("token")          
+              },
             data: data
           };
       
@@ -136,7 +161,7 @@ function useTask() {
               maxBodyLength: Infinity,
               url: url,
               headers: {
-                'Content-Type': 'application/json'
+                'Authorization': 'Bearer ' + Cookies.get("token")          
               },
               data: searchText
             };
@@ -199,7 +224,8 @@ function useTask() {
             method: 'post',
             url: APIURL.baseUrl + APIURL.getTaskInfo,
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + Cookies.get("token")          
             },
             data: JSON.stringify(data)
         };
@@ -244,7 +270,8 @@ function useTask() {
             method: 'post',
             url: APIURL.baseUrl + APIURL.getImages,
             headers: { 
-              'Content-Type': 'application/json'
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + Cookies.get("token")          
             },
             data: data  // burada JSON objesi doğrudan gönderiliyor
           };

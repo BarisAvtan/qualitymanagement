@@ -98,21 +98,21 @@ function Sidenav({ color }) {
           >
             {dashboard}
           </span>
-          <span className="label">Montaj Resimleri</span>
+          <span className="label">Task Images</span>
         </NavLink>
       </Menu.Item>
 
-      <Menu.Item key="OCRTestPage">
-        <NavLink to="/OCRTestPage">
+      <Menu.Item key="qualitymanagement ">
+        <NavLink to="/qualitymanagement">
           <span
             className="icon"
             style={{
-              background: page === "OCRTestPage" ? color : "",
+              background: page === "qualitymanagement" ? color : "",
             }}
           >
             {dashboard}
           </span>
-          <span className="label">OCR Foto Test</span>
+          <span className="label">Task Quality Management </span>
         </NavLink>
       </Menu.Item>
        
