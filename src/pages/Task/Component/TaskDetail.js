@@ -25,7 +25,7 @@ function TaskDetail({ isModalOpen, setIsModalOpen, imageUrls = [], isLoading }) 
     setPreviewOpen(true);
   };
 
-  // Önceki resme geç
+  // Önceki resme geçiş
   const goPrevious = () => {
     if (!imageUrls || !previewImage) return;
     const currentIndex = imageUrls.findIndex((url) => url === previewImage);
@@ -35,7 +35,7 @@ function TaskDetail({ isModalOpen, setIsModalOpen, imageUrls = [], isLoading }) 
     }
   };
 
-  // Sonraki resme geç
+  // Sonraki resme geçiş
   const goNext = () => {
     if (!imageUrls || !previewImage) return;
     const currentIndex = imageUrls.findIndex((url) => url === previewImage);
@@ -45,10 +45,12 @@ function TaskDetail({ isModalOpen, setIsModalOpen, imageUrls = [], isLoading }) 
     }
   };
 
-  const currentIndex = previewImage ? imageUrls.findIndex((url) => url === previewImage) : -1;
-
+  const currentIndex = Array.isArray(imageUrls) && previewImage
+  ? imageUrls.findIndex(url => url === previewImage)
+  : -1;
   return (
     <>
+      {/* Ana Görseller Modalı */}
       <Modal
         width={1500}
         height="50%"
@@ -134,60 +136,96 @@ function TaskDetail({ isModalOpen, setIsModalOpen, imageUrls = [], isLoading }) 
       </Modal>
 
       <Modal open={previewOpen} footer={null} onCancel={() => setPreviewOpen(false)} centered width="50%">
-        {previewImage && (
-          <div style={{ textAlign: 'center' }}>
-            <img
-              src={previewImage}
-              alt="Büyük Önizleme"
-              style={{
-                maxWidth: '100%',
-                maxHeight: '80vh',
-                borderRadius: '10px',
-                transform: `rotate(${rotation}deg)`,
-                transition: 'transform 0.3s ease',
-              }}
-            />
-            <div
-              style={{
-                marginTop: 20,
-                display: 'flex',
-                justifyContent: 'center',
-                gap: 10,
-                alignItems: 'center',
-              }}
-            >
-              <Button onClick={goPrevious} icon={<LeftOutlined />} disabled={currentIndex <= 0}>
-                Önceki
-              </Button>
+  {previewImage && (
+    <div style={{ position: 'relative', display: 'inline-block', width: '100%', textAlign: 'center' }}>
+      
+      {/* Önceki Butonu */}
+      <Button
+        onClick={goPrevious}
+        icon={<LeftOutlined />}
+        disabled={currentIndex <= 0}
+        style={{
+          position: 'absolute',
+          top: '50%',
+          left: 0,
+          //transform: 'translate(-50%, -50%)',
+          zIndex: 10,
+          height: 50,
+          width: 50,
+          borderRadius: '50%',
+        }}
+      />
 
-              <Button onClick={rotateLeft} icon={<RotateLeftOutlined />}>
-                Sola Döndür
-              </Button>
+      {/* Resim */}
+      <img
+        src={previewImage}
+        alt="Büyük Önizleme"
+        style={{
+          maxWidth: '80%',
+          maxHeight: '80vh',
+          borderRadius: 10,
+          transform: `rotate(${rotation}deg)`,
+          transition: 'transform 0.3s ease',
+          display: 'block',
+          margin: '0 auto',
+          transformOrigin: 'center center',
+        }}
+      />
 
-              <Button onClick={rotateRight} icon={<RotateRightOutlined />}>
-                Sağa Döndür
-              </Button>
+      {/* Sonraki Butonu */}
+      <Button
+        onClick={goNext}
+        icon={<RightOutlined />}
+        disabled={currentIndex === -1 || currentIndex >= imageUrls.length - 1}
+        style={{
+          position: 'absolute',
+          top: '50%',
+          right: 0,
+          //transform: 'translate(50%, -50%)',
+          zIndex: 10,
+          height: 50,
+          width: 50,
+          borderRadius: '50%',
+        }}
+      />
+    </div>
+  )}
 
-              <Button onClick={goNext} icon={<RightOutlined />} disabled={currentIndex === -1 || currentIndex >= imageUrls.length - 1}>
-                Sonraki
-              </Button>
+  {/* Döndürme ve Kaydet Butonları */}
+  {previewImage && (
+    <div
+      style={{
+        marginTop: 20,
+        display: 'flex',
+        justifyContent: 'center',
+        gap: 10,
+        alignItems: 'center',
+      }}
+    >
+      <Button onClick={rotateLeft} icon={<RotateLeftOutlined />}>
+        Sola Döndür
+      </Button>
 
-              <a href={previewImage} download target="_blank" rel="noopener noreferrer">
-                <Button
-                  style={{
-                    backgroundColor: '#0A4D80',
-                    color: '#fff',
-                    border: 'none',
-                  }}
-                  icon={<DownloadOutlined />}
-                >
-                  Kaydet
-                </Button>
-              </a>
-            </div>
-          </div>
-        )}
-      </Modal>
+      <Button onClick={rotateRight} icon={<RotateRightOutlined />}>
+        Sağa Döndür
+      </Button>
+
+      <a href={previewImage} download target="_blank" rel="noopener noreferrer">
+        <Button
+          style={{
+            backgroundColor: '#0A4D80',
+            color: '#fff',
+            border: 'none',
+          }}
+          icon={<DownloadOutlined />}
+        >
+          Kaydet
+        </Button>
+      </a>
+    </div>
+  )}
+</Modal>
+
     </>
   );
 }
