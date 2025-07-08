@@ -93,13 +93,13 @@ function useTask() {
             responsive: ['md', 'lg', 'xl']
         },
         {
-            //title: "Fotograf Bilgisi",
+            title: "Fotograf Bilgisi",
             title: (
                 <>
                   Fotoğraf<br /> <br />Bilgisi                </>
               ),
             key: "detail",
-            width: 120, // ← piksel genişlik
+            width: 120, 
             ellipsis: true,
             align: "center",
             render: (_, record) => (
@@ -108,7 +108,7 @@ function useTask() {
                     onClick={() => {
                         setSelectedTask(record.taskGroupId);
                         setIsModalOpen(true);
-                        getTaskDetail(record.taskGroupId, record.deviceName, null, null);
+                        getTaskDetail(record.taskGroupId, record.deviceName, record.completionDate, null);
                     }
                     }
                     style={{
@@ -209,15 +209,15 @@ function useTask() {
         return response.data;
     };
 
-    const getTaskInfo = async (date) => {
+    const getTaskInfo = async (taskData) => {
         debugger;
 
         const data = {
             CustomerId: customerFilter ?? null,
             DealerId: dealerFilter ?? null,
             DeviceId: deviceFilter ?? null,
-            StartDate: date.startDate,
-            EndDate: date.endDate
+            StartDate: taskData.startDate,
+            EndDate: taskData.endDate
         };
     
         const config = {
@@ -263,8 +263,11 @@ function useTask() {
           const key = taskGroupId + "-" + deviceName;
           const data = {
             key: key,
-            date: startDate ?? moment().format("YYYY-MM-DD")
-          };
+            //date: startDate ?? moment().format("YYYY-MM-DD")
+             date : startDate 
+            ? moment(startDate).format("YYYY-MM-DD") 
+            : moment().format("YYYY-MM-DD")
+        };
       
           const config = {
             method: 'post',
@@ -289,11 +292,10 @@ function useTask() {
         }
       };
       
-
-
     const onChangeTransportFee = (value) => {
         setTransportFeeFileter(value);
     };
+
     const onChangeFaultFee = (value) => {
         setFaultFeeFilter(value);
     };
@@ -305,6 +307,7 @@ function useTask() {
     const onChangeDealer = (value) => {
         setDealerFileter(value);
     };
+    
     const onChangeCustomer = (value) => {
         debugger;
         setCustomerFilter(value);
