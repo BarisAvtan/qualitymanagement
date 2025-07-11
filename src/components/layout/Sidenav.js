@@ -98,11 +98,11 @@ function Sidenav({ color }) {
           >
             {dashboard}
           </span>
-          <span className="label">Task Images</span>
+          <span className="label">Montaj Resim Görütüle</span>
         </NavLink>
       </Menu.Item>
 
-      <Menu.Item key="qualitymanagement ">
+      {/* <Menu.Item key="qualitymanagement ">
         <NavLink to="/qualitymanagement">
           <span
             className="icon"
@@ -114,7 +114,7 @@ function Sidenav({ color }) {
           </span>
           <span className="label">Task Quality Management </span>
         </NavLink>
-      </Menu.Item>
+      </Menu.Item> */}
        
     
         </Menu>

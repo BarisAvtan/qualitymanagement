@@ -45,22 +45,27 @@ function Task() {
 
 
     useEffect(() => {
-      
+        debugger;
         if (location?.search) {
+          const queryParams = new URLSearchParams(location.search);
+          const userName = queryParams.get('userName');
+          const token = queryParams.get('token');
     
-            // Cookies.set('token', location?.search?.split("=")[1]?? '');
-            const queryParams = new URLSearchParams(location.search);
-            const userName = queryParams.get('userName');
-            const token = queryParams.get('token');
+          if (!token) {
+            // Token yoksa yetkisiz erişim sayfasına yönlendir
+            navigate('/unauthorized');
+            return;
+          }
     
-            Cookies.set('token', token);
-            Cookies.set('userName', userName);
-            
-            navigate('/task');
+          Cookies.set('token', token);
+          Cookies.set('userName', userName ?? '');
+    
+          navigate('/task');
+        } else {
+          // location.search boşsa doğrudan yetkisiz sayfaya yönlendir
+          navigate('/unauthorized');
         }
-    
-    }, [])
-
+      }, []);
     const customerSearch = async (newValue) => {
         const [searchTextCustomerData] = await Promise.all([
             getCustomers(newValue)

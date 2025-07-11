@@ -1,8 +1,8 @@
 {
-  "name": "remotedatareader",
+  "name": "remotedatamodule",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://crmportal.arvento.com/qualitymanagement",
+  "homepage": "https://crmportal.arvento.com/remotedatamodule",
   "dependencies": {
     "@ant-design/icons": "^5.3.1",
     "@reduxjs/toolkit": "^2.2.1",

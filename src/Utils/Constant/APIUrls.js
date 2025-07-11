@@ -1,7 +1,7 @@
 
 const APIURL = {
- baseUrl : "https://localhost:7237/api",
- //baseUrl : "https://crmportal.arvento.com/AppointmentTrackingService/api/", 
+ //baseUrl : "https://localhost:7237/api",
+ baseUrl : "https://crmportal.arvento.com/RemoteDataModuleService/api", 
 //getImages :"/Snap/images/indexed2",
 getImages :"/Snap/getMontageImage",
 //getTaskInfo:"/Task/Gettas",
